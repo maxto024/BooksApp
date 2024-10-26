@@ -1,80 +1,150 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# BookApp
 
-# Getting Started
+BookApp is a React Native application that displays a list of books with their titles, authors, and cover images. The app uses **Redux** for state management, **Redux-Saga** for handling asynchronous actions, **TypeScript** for static type checking, and **Jest** for testing. It’s optimized for performance and scalability with best practices applied throughout the codebase.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+- Display a list of books with titles, authors, and cover images.
+- Fetch data from a REST API using Redux-Saga.
+- Optimized `FlatList` for performance.
+- Cross-platform compatibility (iOS and Android).
+- Full testing coverage with Jest and React Native Testing Library.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Getting Started
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Prerequisites
 
-```bash
-# using npm
-npm start
+- [Node.js](https://nodejs.org/)
+- [React Native CLI](https://reactnative.dev/docs/environment-setup)
+- [Android Studio and Xcode (for iOS)](https://reactnative.dev/docs/environment-setup)
+- [CocoaPods (for iOS)](https://cocoapods.org/)
 
-# OR using Yarn
-yarn start
-```
+### Installation
 
-## Step 2: Start your Application
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/BookApp.git
+   cd BookApp
+Install dependencies:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+bash
+Copy code
+npm install
+cd ios
+pod install
+cd ..
+Start the application:
 
-### For Android
+For Android:
+bash
+Copy code
+npx react-native run-android
+For iOS:
+bash
+Copy code
+npx react-native run-ios
+Run tests:
 
-```bash
-# using npm
-npm run android
+bash
+Copy code
+npm test
+Project Structure
+Here’s a breakdown of the main project structure to help you understand the file organization and purpose of each folder.
 
-# OR using Yarn
-yarn android
-```
+lua
+Copy code
+BookApp/
+├── src/
+│   ├── api/
+│   │   └── bookApi.ts
+│   ├── components/
+│   │   └── BookCard.tsx
+│   ├── screens/
+│   │   └── BookListScreen.tsx
+│   ├── store/
+│   │   ├── bookSlice.ts
+│   │   ├── bookSaga.ts
+│   │   └── store.ts
+│   ├── types/
+│   │   ├── book.ts
+│   │   └── index.ts
+│   ├── utils/
+│   │   └── constants.ts
+│   ├── App.tsx
+├── __tests__/
+│   ├── api/
+│   │   └── bookApi.test.ts
+│   ├── components/
+│   │   └── BookCard.test.tsx
+│   ├── screens/
+│   │   └── BookListScreen.test.tsx
+│   ├── store/
+│   │   ├── bookSlice.test.ts
+│   │   └── bookSaga.test.ts
+├── babel.config.js
+├── jest.config.js
+├── package.json
+├── tsconfig.json
+└── README.md
+Detailed Explanation of Key Folders and Files
+src/
+This is the main source folder containing all app code.
 
-### For iOS
+api/: Contains API-related code.
 
-```bash
-# using npm
-npm run ios
+bookApi.ts: Defines the function for fetching book data from an external API. It uses Axios for making HTTP requests.
+components/: Contains reusable UI components.
 
-# OR using Yarn
-yarn ios
-```
+BookCard.tsx: A functional component responsible for displaying individual book details, including the cover image, title, and author.
+screens/: Contains screen components, each representing a different view or screen in the app.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+BookListScreen.tsx: Displays a list of books using a FlatList component. It connects to the Redux store to fetch and render book data and handles loading and error states.
+store/: Contains Redux-related files.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+bookSlice.ts: Defines the bookSlice, which includes state, actions, and reducers for managing book data.
+bookSaga.ts: Contains the bookSaga, which handles asynchronous actions for fetching book data and dispatching relevant Redux actions on success or failure.
+store.ts: Configures and exports the Redux store, applying redux-saga middleware for handling side effects.
+types/: Holds TypeScript type definitions.
 
-## Step 3: Modifying your App
+book.ts: Defines the Book interface for representing book data.
+index.ts: Centralizes all types for easy imports.
+utils/: Contains utility files or constants.
 
-Now that you have successfully run the app, let's modify it.
+constants.ts: Stores constant values, such as the API URL.
+App.tsx: The root component of the app, which sets up the Redux Provider and renders the main BookListScreen.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+__tests__/
+This folder contains test files, with tests organized to match the structure of the src folder for clarity.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+api/: Contains tests for API functions.
 
-## Congratulations! :tada:
+bookApi.test.ts: Tests the fetchBooks API function for successful and failed fetch scenarios.
+components/: Contains component tests.
 
-You've successfully run and modified your React Native App. :partying_face:
+BookCard.test.tsx: Tests the BookCard component, verifying that it renders the title, author, and cover image.
+screens/: Contains screen component tests.
 
-### Now what?
+BookListScreen.test.tsx: Tests the BookListScreen component, covering loading, error, and data rendering states, and ensuring that the fetchBooks action is dispatched.
+store/: Contains tests for Redux slice and saga.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# BooksApp
+bookSlice.test.ts: Tests the bookSlice reducers to ensure state updates correctly.
+bookSaga.test.ts: Tests the bookSaga to confirm that it correctly handles API calls and dispatches success or failure actions.
+Root Files
+babel.config.js: Babel configuration file for transforming code.
+jest.config.js: Jest configuration file for setting up the test environment and specifying custom transformations.
+package.json: Lists dependencies, scripts, and metadata for the project.
+tsconfig.json: TypeScript configuration file for setting up type checking and compiler options.
+README.md: This file, providing an overview of the project.
+Usage
+Start the App: Run npx react-native run-android for Android or npx react-native run-ios for iOS to start the app in the respective emulator.
+Testing: Run npm test to execute all tests in the __tests__ folder. This includes tests for API, Redux, and components.
+Adding New Features:
+Place new screens in the src/screens/ folder.
+Create additional components in src/components/.
+If new actions or state management are required, add new slices in src/store/.
+Update types in src/types/ as needed.
+Performance Optimization
+FlatList is optimized for handling large data sets by setting props like initialNumToRender, maxToRenderPerBatch, windowSize, and removeClippedSubviews.
+Images are managed carefully to avoid memory issues on iOS and Android.
+Contributing
+If you'd like to contribute, please fork the repository, create a new branch, and submit a pull request. Ensure that all tests pass before submitting.
