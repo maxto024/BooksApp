@@ -93,11 +93,8 @@ This folder contains test files, with tests organized to match the structure of 
 
 #### Root Files
 
-- **`babel.config.js`**: Babel configuration file for transforming code
-- **`jest.config.js`**: Jest configuration file for setting up the test environment and specifying custom transformations
-- **`package.json`**: Lists dependencies, scripts, and metadata for the project
 - **`tsconfig.json`**: TypeScript configuration file for setting up type checking and compiler options
-- **`README.md`**: This file, providing an overview of the project
+
 
 ## Usage
 
